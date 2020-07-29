@@ -1,8 +1,8 @@
 """
-This file contains routes related to cusomizing restaurant user's goals.
+This file contains routes related to customizing restaurant user's goals.
 """
 
-from flask import Blueprint, render_template, request, redirect, flash
+from flask import Blueprint, render_template, request, redirect, flash, jsonify
 from flask_login import current_user, login_required
 
 bp = Blueprint("goals", __name__)
@@ -32,6 +32,21 @@ def add_goal():
     if not added:
         flash("This is a duplicate goal. Goal not added.")
     return redirect("/goals")
+
+@bp.route('/verify-goal/<string:code_data>', methods=['POST', 'GET'])
+@login_required
+def verify_goal(code_data):
+    """
+
+    """
+    data = code_data.split("+")
+    goals = current_user.get_goals()
+    goal = ""
+    for goal in goals:
+        if str(goal['_id']) == data[1]:
+            goal = goal['goal']
+
+    return jsonify({'goal': goal})
 
 @bp.route('/delete', methods=['POST'])
 @login_required

@@ -12,6 +12,14 @@ let scanning = false;
 
 qr.callback = res => {
   if (res) {
+    $.ajax({
+        url: "/goals/verify-goal/" + res,        
+        type: 'POST',
+    })
+    .done(function(data){
+      $('#outputData').text(data.goal).show() 
+
+    });
     outputData.innerText = res;
     scanning = false;
 
