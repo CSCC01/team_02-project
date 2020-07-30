@@ -15,6 +15,12 @@ h1 {
   margin: 0;
   padding: 15px;
 }
+
+.verify {
+  text-align: center;
+  color: white;
+}
+
 #instructions {
   color: white;
   text-align: center;
