@@ -243,3 +243,29 @@ h1 {
     color: black;
     font-size: 16px;
 }
+
+#horizontal-reward:hover{
+    cursor: pointer;
+    background-color: orange;
+}
+
+#vertical-reward:hover{
+    cursor: pointer;
+    background-color: cyan;
+}
+
+#d-diagonal-reward:hover{
+    cursor: pointer;
+    background-color: yellow;
+}
+
+#a-diagonal-reward:hover{
+    cursor: pointer;
+    background-color: pink;
+}
+
+#reward-card-info{
+    background-color: #fff;
+    color: black;
+    font-size: 16px;
+}

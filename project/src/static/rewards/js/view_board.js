@@ -40,3 +40,18 @@ for (let i = 0; i < $('.card').length; i++) {
             }
         });
 }
+
+
+function toggle(e) {
+    if (!e) var e = window.event;                // Get the window event
+    e.cancelBubble = true;                       // IE Stop propagation
+    if (e.stopPropagation) e.stopPropagation();  // Other Broswers
+
+    if( document.getElementById("horizontal-rc").style.display=='none' ){
+       console.log(document.getElementById("horizontal-rc").style.display);
+       document.getElementById("horizontal-rc").style.display = '';// set to table-row instead of an empty string
+       console.log(document.getElementById("horizontal-rc").style.display);
+    } else {
+       document.getElementById("horizontal-rc").style.display = 'none';
+    }
+}
