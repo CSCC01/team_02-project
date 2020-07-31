@@ -213,11 +213,12 @@ class RestaurantProfileManager(ProfileManager):
             owner_id = self.db.query('restaurant_users', {"username": self.id})[0]["_id"]
             user_profile = self.db.query('customers', {"username": user})[0]
             restaurant_exists = False
-            for restaurant in user_profile["progress"]:
-                if restaurant["restaurant_id"] == owner_id:
-                    id_exists = True
+            if "progress" in user_profile:
+                for restaurant in user_profile["progress"]:
+                    if restaurant["restaurant_id"] == owner_id:
+                        id_exists = True
             try:
-                if user_profile["progress"] and id_exists:
+                if "progress" in user_profile and id_exists:
                     self.db.update('customers', {"username": user, "progress.restaurant_id": ObjectId(owner_id)},
                                    {"$push": {
                                        "progress.$.completed_goals": {

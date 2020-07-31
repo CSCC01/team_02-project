@@ -46,7 +46,7 @@ def finished_goal():
     user = data[0]
     goal_id = data[1]
     position = data[2]
-    return str(current_user.complete_goal(user, goal_id, position))
+    current_user.complete_goal(user, goal_id, position)
     return redirect("/profile")
 
 @bp.route('/delete', methods=['POST'])
