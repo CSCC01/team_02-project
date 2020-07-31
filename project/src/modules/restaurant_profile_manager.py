@@ -6,6 +6,7 @@ It is used to interact with the restaurant profile database.
 from bson.objectid import ObjectId
 from modules.profile_manager import ProfileManager
 from modules.database import Database, QueryFailureException, UpdateFailureException
+from datetime import datetime
 
 class RestaurantProfileManager(ProfileManager):
     """
@@ -201,3 +202,46 @@ class RestaurantProfileManager(ProfileManager):
         except QueryFailureException:
             print("There was an issue deleting the goal.")
             return False
+
+
+    def complete_goal(self, user, goal_id, position):
+        """
+        Adds a goal to the database that has been completed by the customer and returns
+        True upon success; throws exception and returns False otherwise.
+        """
+        try:
+            owner_id = self.db.query('restaurant_users', {"username": self.id})[0]["_id"]
+            user_profile = self.db.query('customers', {"username": user})[0]
+            restaurant_exists = False
+            for restaurant in user_profile["progress"]:
+                if restaurant["restaurant_id"] == owner_id:
+                    id_exists = True
+            try:
+                if user_profile["progress"] and id_exists:
+                    self.db.update('customers', {"username": user, "progress.restaurant_id": ObjectId(owner_id)},
+                                   {"$push": {
+                                       "progress.$.completed_goals": {
+                                           "_id": ObjectId(goal_id),
+                                           "position": position,
+                                           "date_completed": datetime.now()}}})
+                else:
+                    self.db.update(
+                        'customers', {"username": self.id},
+                        {"$push": {
+                            "progress": {
+                                "restaurant_id": ObjectId(owner_id),
+                                "completed_goals": [{
+                                    "_id": ObjectId(goal_id),
+                                    "position": position,
+                                    "date": datetime.now()
+                                }]
+                            }
+                        }})
+                return True
+            except UpdateFailureException:
+                print("There was an issue updating")
+                return False
+        except QueryFailureException:
+            print("Something is wrong with the query")
+            return False
+        return False
