@@ -22,7 +22,6 @@ qr.callback = res => {
       $('#outputData').text(data.goal)
 
     });
-    outputData.innerText = res;
     inputBox.value = res;
     scanning = false;
 

@@ -33,15 +33,25 @@ def add_goal():
         flash("This is a duplicate goal. Goal not added.")
     return redirect("/goals")
 
+@bp.route('/verify-goal/<string:code_data>', methods=['POST', 'GET'])
+@login_required
+def verify_goal(code_data):
+    """
+
+    """
+    data = code_data.split("+")
+    goals = current_user.get_goals()
+    goal = ""
+    for goal in goals:
+        if str(goal['_id']) == data[1]:
+            goal = goal['goal']
+
+    return jsonify({'goal': goal['goal']})
+
 
 @bp.route('/finish-goal', methods=['POST', 'GET'])
 @login_required
 def finished_goal():
-    """
-    When calling this route, mark goal as complete given in form.
-    Redirect to the profile page on completion.
-    Prerequisite: User is logged in.
-    """
     data = request.form["code"].split("+")
     user = data[0]
     goal_id = data[1]
