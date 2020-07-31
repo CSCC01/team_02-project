@@ -44,9 +44,9 @@ def verify_goal(code_data):
     goal = ""
     for goal in goals:
         if str(goal['_id']) == data[1]:
-            goal = goal['goal']
+            return jsonify({'goal': goal['goal']})
 
-    return jsonify({'goal': goal['goal']})
+    return jsonify({'goal': "No Goal Found"})
 
 
 @bp.route('/finish-goal', methods=['POST', 'GET'])
