@@ -53,11 +53,16 @@ def verify_goal(code_data):
 @login_required
 def finished_goal():
     data = request.form["code"].split("+")
+    if len(data) != 3:
+        flash("Invalid QR code!")
+        return redirect("/profile/qr-verification")
     user = data[0]
     goal_id = data[1]
     position = data[2]
-    current_user.complete_goal(user, goal_id, position)
-    return redirect("/profile")
+    msg = "Successfully marked as completed!"
+    msg = current_user.complete_goal(user, goal_id, position)
+    flash(msg)
+    return redirect("/profile/qr-verification")
 
 @bp.route('/delete', methods=['POST'])
 @login_required

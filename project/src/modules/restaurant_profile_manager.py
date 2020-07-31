@@ -212,11 +212,17 @@ class RestaurantProfileManager(ProfileManager):
         try:
             owner_id = self.db.query('restaurant_users', {"username": self.id})[0]["_id"]
             user_profile = self.db.query('customers', {"username": user})[0]
-            restaurant_exists = False
             if "progress" in user_profile:
                 for restaurant in user_profile["progress"]:
                     if restaurant["restaurant_id"] == owner_id:
+                        goals = restaurant["completed_goals"]
+                        for goal in goals:
+                            if str(goal["_id"]) == goal_id and position == goal["position"]:
+                                return "This goal has already been completed!"
                         id_exists = True
+            if not isinstance(position, int) or not (1 <= len(position) <= 2) or not (0 <= int(position) <= 24) \
+                    or not str(self.get_bingo_board()["board"][position]) == goal_id:
+                return "Invalid QR code!"
             try:
                 if "progress" in user_profile and id_exists:
                     self.db.update('customers', {"username": user, "progress.restaurant_id": ObjectId(owner_id)},
@@ -238,11 +244,11 @@ class RestaurantProfileManager(ProfileManager):
                                 }]
                             }
                         }})
-                return True
+                return "Successfully marked as completed!"
             except UpdateFailureException:
                 print("There was an issue updating")
-                return False
+                return "Error"
         except QueryFailureException:
             print("Something is wrong with the query")
-            return False
-        return False
+            return "Error"
+        return "Error"

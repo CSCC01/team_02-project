@@ -13,6 +13,15 @@
     <div id="container">
       <h1>QR Code Scanner</h1>
     <div id="instructions">
+        <p id="message" 
+            {% with messages = get_flashed_messages() %}
+                {% if not messages %}
+                    style="background-color: black;" class="hidden"> 
+                {% else %}
+                    >{{messages[0]}} 
+                {% endif %}
+            {% endwith %}
+        </p>
     <p class="instructions">Click the Qr code below to activate camera and start scanning!</p>
     <p class="instructions">Once a code is scanned, you can scan again or verify for completion.</p>
     </div>

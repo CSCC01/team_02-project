@@ -21,6 +21,19 @@ h1 {
   color: white;
 }
 
+#message {
+    color: #fb2525;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    border: 2px;
+    font-weight: bold;
+    width: 50%;
+}
+
 #instructions {
   color: white;
   text-align: center;
