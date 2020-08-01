@@ -1,6 +1,6 @@
 """
-This file houses the unit test suite for viewing the goal customization interface
-of a restaurant profile.
+This file houses the unit test suite for Scanning qr codes for customer goals and
+makring the goals as complete
 """
 import os
 import sys
@@ -24,14 +24,14 @@ def client():
 
 def test_verification_route_no_login(client):
     """
-    Test that goal customization page does not load unless user is logged in.
+    Test that qr verification page does not load unless user is logged in.
     """
     res = client.get("/profile/qr-verification", follow_redirects=True)
     assert b"Please log in to access this page" in res.data
 
 def test_verification_route_logged_in(client):
     """
-    Test that goal customization page loads when the user is logged in.
+    Test that qr verification page loads when the user is logged in.
     """
     client.post("/login", data={"username": "junaid", "password": "Junaid123"})
     res = client.get("/profile/qr-verification", follow_redirects=True)
@@ -39,7 +39,7 @@ def test_verification_route_logged_in(client):
 
 def test_valid_completed_goal(client):
     """
-    Test that a user cannot add a goal when they're not logged in.
+    Test that a user can mark a valid goal as complete.
     """
     rpm = RestaurantProfileManager("junaid")
     code = "junaid+5ef5009bccd1e88ead4cd076+0".split("+")
@@ -48,7 +48,7 @@ def test_valid_completed_goal(client):
 
 def test_duplicate_completed_goal(client):
     """
-    Test that a user cannot add a goal when they're not logged in.
+    Test that a duplicate goal can't be completed again.
     """
     rpm = RestaurantProfileManager("junaid")
     code = "junaid+5ef5009bccd1e88ead4cd076+0".split("+")
@@ -57,7 +57,7 @@ def test_duplicate_completed_goal(client):
 
 def test_invalid_goal(client):
     """
-    Test that a user cannot add a goal when they're not logged in.
+    Test that a user can't complete an invalid goal.
     """
     rpm = RestaurantProfileManager("junaid")
     code = "junaid+5ef5009bccd1e88ead4cd076+1".split("+")
