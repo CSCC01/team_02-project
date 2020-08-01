@@ -59,7 +59,6 @@ def finished_goal():
     user = data[0]
     goal_id = data[1]
     position = data[2]
-    msg = "Successfully marked as completed!"
     msg = current_user.complete_goal(user, goal_id, position)
     flash(msg)
     return redirect("/profile/qr-verification")

@@ -220,8 +220,8 @@ class RestaurantProfileManager(ProfileManager):
                             if str(goal["_id"]) == goal_id and position == goal["position"]:
                                 return "This goal has already been completed!"
                         id_exists = True
-            if not isinstance(position, int) or not (1 <= len(position) <= 2) or not (0 <= int(position) <= 24) \
-                    or not str(self.get_bingo_board()["board"][position]) == goal_id:
+            if not isinstance(int(position), int) or not (1 <= len(position) <= 2) or not (0 <= int(position) <= 24) \
+                    or not str(self.get_bingo_board()["board"][int(position)]) == goal_id:
                 return "Invalid QR code!"
             try:
                 if "progress" in user_profile and id_exists:
