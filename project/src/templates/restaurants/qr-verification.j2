@@ -24,6 +24,7 @@
         </p>
     <p class="instructions">Click the Qr code below to activate camera and start scanning!</p>
     <p class="instructions">Once a code is scanned, you can scan again or verify for completion.</p>
+    <p class="instructions">You may even manually enter a code if you wish in the input box below.</p>
     </div>
       <a id="btn-scan-qr">
         <img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg">
@@ -38,7 +39,7 @@
         <form class="verify" method="post" action="/goals/finish-goal">
           <label>QR Code:</label>
           <input type="text" id="code" name="code"><br><br>
-          <input type="submit" value="Mark for completion">
+          <input id="mark" type="submit" value="Mark for completion">
         </form> 
       </div>
     </div>
