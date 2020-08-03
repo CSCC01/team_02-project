@@ -207,7 +207,7 @@ class RestaurantProfileManager(ProfileManager):
     def complete_goal(self, user, goal_id, position):
         """
         Adds a goal to the database that has been completed by the customer and returns
-        True upon success; throws exception and returns False otherwise.
+        a message depending on if it is successful or not.
         """
         try:
             owner_id = self.db.query('restaurant_users', {"username": self.id})[0]["_id"]
