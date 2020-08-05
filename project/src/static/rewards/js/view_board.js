@@ -41,7 +41,34 @@ for (let i = 0; i < $('.card').length; i++) {
         });
 }
 
+/**
+ * Show the goal row associated by the given reward.
+ */
+function showGoal(j, reward) {
+    $(reward)
+        .eq(j)
+        .slideDown(1000);
+}
 
+// let horRewAnimationLock = false;
+
+/**
+ * Add event listeners to each reward row so that their card shows.
+ */
+for (let j = 0; j < $('.card').length; j++) {
+    $('#horizontal-reward')
+        .eq(j)
+        .click(function () {
+            console.log("I was clicked"); // This doesn't show on log.
+            //if (!horRewAnimationLock) {
+                //horRewAnimationLock = true;
+                if ($('.reward-card:visible').length !== 1) showGoal(j, '#horizontal-rc');
+                else $('.reward-card:visible').slideUp(1000, () => showGoal('#horizontal-rc'));
+            //}
+        });
+}
+
+/*
 function toggle(e) {
     if (!e) var e = window.event;                // Get the window event
     e.cancelBubble = true;                       // IE Stop propagation
@@ -54,4 +81,4 @@ function toggle(e) {
     } else {
        document.getElementById("horizontal-rc").style.display = 'none';
     }
-}
+}*/

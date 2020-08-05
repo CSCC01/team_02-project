@@ -58,21 +58,20 @@
 							</tr>
 							<tr>
 								<td colspan=2 id="reward-instruction">
-									Complete all goals highlighted by the same colour to earn the rewards below! Click the reward to figure out the other goals you need to complete.
+									Complete all goals highlighted by the same colour to earn the rewards below! Click the reward to see the other goals you need to complete.
 								</td>
 							</tr>
-							<tr>
-								
+							<tr id="horizontal-reward">
 								<td height="50" style="background-color: orange">Horizontal</td>
-								<td id="horizontal-reward"
-									onClick="toggle()">
+								<td class="horizontal-reward {{i}}">
 										{{rewards[(i // 5 + 1)]["reward"]}}
 								</td>
 							</tr>
-							<tr id="horizontal-rc">
+							<tr class="hidden reward-card"
+								id="horizontal-rc">
 								<td colspan=2 
 									id="reward-card-info"
-									class="reward-card-info">
+									>
 									<ul>
 									{% for j in range((i // 5 * 5), (i // 5 * 5 + 5), 1) %}
 										<li> 
@@ -83,11 +82,14 @@
 								</td>
 							</tr>
 							
-							<tr>
+							<tr id="vertical-reward">
 								<td height="50" style="background-color: cyan">Vertical</td>
-								<td class="reward" id="vertical-reward">{{rewards[(i % 5 + 6)]["reward"]}}</td>
+								<td class="reward">
+									{{rewards[(i % 5 + 6)]["reward"]}}
+								</td>
 							</tr>
-							<tr id="vert-rc">
+							<tr class="hidden reward-card"
+								id="vert-rc">
 								<td colspan=2
 									id="reward-card-info">
 									<ul>
@@ -101,11 +103,12 @@
 							</tr>
 
 							{% if i % 5 == i // 5 %}
-								<tr>
+								<tr id="d-diagonal-reward">
 									<td height="50" style="background-color: yellow">Descending Diagonal</td>
-									<td class="reward" id="d-diagonal-reward">{{rewards[11]["reward"]}}</td>
+									<td class="reward">{{rewards[11]["reward"]}}</td>
 								</tr>
-								<tr id="des-dia-rc">
+								<tr class="hidden reward-card"
+									id="des-dia-rc">
 									<td colspan=2
 										id="reward-card-info">
 										<ul>
@@ -119,11 +122,14 @@
 								</tr>
 							{% endif %}
 							{% if i // 5 == 4 - (i % 5) %}
-								<tr>
+								<tr id="a-diagonal-reward">
 									<td height="50" style="background-color: pink">Ascending Diagonal</td>
-									<td class="reward" id="a-diagonal-reward">{{rewards[0]["reward"]}}</td>
+									<td class="reward">
+										{{rewards[0]["reward"]}}
+									</td>
 								</tr>
-								<tr id="asc-dia-rc">
+								<tr class="hidden reward-card"
+									id="asc-dia-rc">
 									<td colspan=2
 										id="reward-card-info">
 										<ul>
@@ -135,6 +141,10 @@
 								</tr>
 							{% endif %}
 						</table>
+					</div>
+					<hr>
+					<div class="hidden reward-goals">
+
 					</div>
 					<hr>
 					<div class="goal-status">
