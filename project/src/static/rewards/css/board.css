@@ -264,8 +264,9 @@ h1 {
     background-color: pink;
 }
 
-#reward-card-info{
-    background-color: #fff;
-    color: black;
-    font-size: 16px;
+.horizontal-reward-goals,
+.vertical-reward-goals,
+.d-diagonal-reward-goals,
+.a-diagonal-reward-goals{
+    display:none;
 }

@@ -41,44 +41,33 @@ for (let i = 0; i < $('.card').length; i++) {
         });
 }
 
-/**
- * Show the goal row associated by the given reward.
- */
-function showGoal(j, reward) {
-    $(reward)
-        .eq(j)
-        .slideDown(1000);
-}
-
-// let horRewAnimationLock = false;
 
 /**
  * Add event listeners to each reward row so that their card shows.
  */
 for (let j = 0; j < $('.card').length; j++) {
-    $('#horizontal-reward')
+    $('.horizontal-reward')
         .eq(j)
         .click(function () {
-            console.log("I was clicked"); // This doesn't show on log.
-            //if (!horRewAnimationLock) {
-                //horRewAnimationLock = true;
-                if ($('.reward-card:visible').length !== 1) showGoal(j, '#horizontal-rc');
-                else $('.reward-card:visible').slideUp(1000, () => showGoal('#horizontal-rc'));
-            //}
+            console.log("I was clicked.");
+            $(".horizontal-reward-goals").slideToggle("slow");
+        });
+    $('.vertical-reward')
+        .eq(j)
+        .click(function () {
+            console.log("I was clicked.");
+            $(".vertical-reward-goals").slideToggle("slow");
+        });
+    $('.d-diagonal-reward')
+        .eq(j)
+        .click(function () {
+            console.log("I was clicked.");
+            $(".d-diagonal-reward-goals").slideToggle("slow");
+        });
+    $('.a-diagonal-reward')
+        .eq(j)
+        .click(function () {
+            console.log("I was clicked.");
+            $(".a-diagonal-reward-goals").slideToggle("slow");
         });
 }
-
-/*
-function toggle(e) {
-    if (!e) var e = window.event;                // Get the window event
-    e.cancelBubble = true;                       // IE Stop propagation
-    if (e.stopPropagation) e.stopPropagation();  // Other Broswers
-
-    if( document.getElementById("horizontal-rc").style.display=='none' ){
-       console.log(document.getElementById("horizontal-rc").style.display);
-       document.getElementById("horizontal-rc").style.display = '';// set to table-row instead of an empty string
-       console.log(document.getElementById("horizontal-rc").style.display);
-    } else {
-       document.getElementById("horizontal-rc").style.display = 'none';
-    }
-}*/
